@@ -1,0 +1,107 @@
+﻿<Window x:Class="HyperlinkingPDFsWithUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HyperlinkingPDFsWithUI"
+        mc:Ignorable="d"
+        Title="Google Drive PDF Renaming and Linking Utility" Height="650" Width="800" Icon="Images/WT-Orange.ico">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="1*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="90"/>
+      <RowDefinition Height="9*"/>
+      <RowDefinition Height="1*"/>
+    </Grid.RowDefinitions>
+    <Grid.Resources>
+      <Style TargetType="Label">
+        <Setter Property="Foreground" Value="#FFFF6319"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="MinWidth" Value=" 100"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="MinHeight" Value="24"/>
+        <Setter Property="Margin" Value="2"/>
+      </Style>
+      <Style TargetType="DataGridColumnHeader">
+        <Setter Property="Foreground" Value="#FFFF6319"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="MinWidth" Value=" 100"/>
+        <Setter Property="FontSize" Value="13"/>
+      </Style>
+      <Style TargetType="Button">
+        <Setter Property="MinHeight" Value="24"/>
+        <Setter Property="MinWidth" Value="120"/>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="Foreground" Value="#FFFF6319"/>
+        <Setter Property="MaxHeight" Value="60"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+      </Style>
+      <Style TargetType="TextBox">
+        <Setter Property="MinWidth" Value="300"/>
+        <Setter Property="MinHeight" Value="24"/>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+      </Style>
+      <Style TargetType="ProgressBar">
+        <Setter Property="Foreground" Value="#FFFF6319"/>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="BorderBrush" Value="DarkGray"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      </Style>
+    </Grid.Resources>
+
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="3.75*"/>
+        <ColumnDefinition Width="0.25*"/>
+        <ColumnDefinition Width="1*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="1*"/>
+        <RowDefinition Height="1*"/>
+        <RowDefinition Height="1*"/>
+      </Grid.RowDefinitions>
+
+      <!--Grid First Row: Credentials-->
+      <Label Content="Credentials Location:" Grid.Row="0" Grid.Column="0" />
+      <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CredentialDirectory}"/>
+      <Image Grid.Row="0"  Grid.Column="2" Source="{Binding IsAuthorized,Converter={x:Static local:ConnectedHeaderToImageConverter.Instance}}"/>
+      <Button Grid.Row="0" Grid.Column="3" Content="Browse" Command="{Binding SetCredentialsLocation}"/>
+
+      <!--Grid Second Row: Spreadsheet-->
+      <Label Grid.Row="1" Grid.Column="0" Content="Spreadsheet ID:"/>
+      <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SpreadsheetId}"/>
+      <Image Grid.Row="1"  Grid.Column="2" Source="{Binding IsSpreadSheetSelected,Converter={x:Static local:ConnectedHeaderToImageConverter.Instance}}"/>
+      <Button Grid.Row="1" Grid.Column="3" IsEnabled="{Binding IsAuthorized}" Content="Get GSheet" Command="{Binding TryGetSpreadsheetById}"/>
+
+      <!--Grid Third Row: Folder-->
+      <Label Grid.Row="2" Grid.Column="0" Content="Drive Folder ID:"/>
+      <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding DriveFolderId}"/>
+      <Image Grid.Row="2"  Grid.Column="2" Source="{Binding IsFolderSelected,Converter={x:Static local:ConnectedHeaderToImageConverter.Instance}}"/>
+      <Button Grid.Row="2" Grid.Column="3" IsEnabled="{Binding IsSpreadSheetSelected}" Content="Get GFolder" Command="{Binding TryGetFolderById}"/>
+    </Grid>
+    
+    <ListBox Grid.Row="1" ItemsSource="{Binding DriveFiles}" VerticalAlignment="Stretch" MinHeight="300" ScrollViewer.VerticalScrollBarVisibility="Auto"  HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+            <DockPanel LastChildFill="True" HorizontalAlignment="Stretch">
+              <!--<TextBlock Text="File Name: "/>-->
+              <TextBlock Text="{Binding FileName}"/>
+            <Button HorizontalAlignment="Right" Content="Go to Link" Command="{Binding OpenSheetUrl}" IsEnabled="{Binding IsLinkEnabled}"/>
+            </DockPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+
+
+    <DockPanel Grid.Row="2" >
+      <Button VerticalAlignment="Stretch" Content="Run" Command="{Binding GetFilesFromDrive}" IsEnabled="{Binding IsFolderSelected}"/>
+      <ProgressBar IsEnabled="{Binding IsProgressEnabled}" Value="{Binding ProgressValue}" IsIndeterminate="{Binding IsProgressEnabled}"/>
+    </DockPanel>
+
+  </Grid>
+</Window>

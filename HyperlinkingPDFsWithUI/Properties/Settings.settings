@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="HyperlinkingPDFsWithUI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SpreadsheetId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1g5l1WEZC9FBmduamrW0HEEde_AoAfjfLiRyCwc4ypII</Value>
+    </Setting>
+    <Setting Name="SheetName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PDFLinking</Value>
+    </Setting>
+    <Setting Name="CredentialFilepath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\mclark1\Downloads\credentials.json</Value>
+    </Setting>
+    <Setting Name="FolderId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1rvewk8nRAoEAAUx6yH9z0gmChxfQO8E5</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
