@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="SpreadsheetId" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1g5l1WEZC9FBmduamrW0HEEde_AoAfjfLiRyCwc4ypII</Value>
+      <Value Profile="(Default)">replace</Value>
     </Setting>
     <Setting Name="SheetName" Type="System.String" Scope="User">
       <Value Profile="(Default)">PDFLinking</Value>
@@ -12,7 +12,7 @@
       <Value Profile="(Default)">C:\Users\mclark1\Downloads\credentials.json</Value>
     </Setting>
     <Setting Name="FolderId" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1rvewk8nRAoEAAUx6yH9z0gmChxfQO8E5</Value>
+      <Value Profile="(Default)">replace</Value>
     </Setting>
   </Settings>
 </SettingsFile>
